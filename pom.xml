@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.voder.arc42</groupId>
+	<artifactId>arc42-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray-plugins</name>
+			<url>http://jcenter.bintray.com/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>se.natusoft.tools.doc.markdowndoc</groupId>
+				<artifactId>markdowndoc-maven-plugin</artifactId>
+				<version>1.4.1</version>
+
+				<executions>
+					<execution>
+						<id>generate-docs</id>
+						<goals>
+							<goal>doc</goal>
+						</goals>
+						<phase>install</phase>
+						<configuration>
+							<generatorOptions>
+								<generator>pdf</generator>
+								<inputPaths>md/.*.md</inputPaths>
+							</generatorOptions>
+							<pdfGeneratorOptions>
+								<resultFile>dist/arc42-template-DE.pdf</resultFile>
+							</pdfGeneratorOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
