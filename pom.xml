@@ -10,6 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<markdowndoc.version>1.4.1</markdowndoc.version>
 	</properties>
 
 	<repositories>
@@ -32,33 +33,76 @@
 			<url>http://jcenter.bintray.com/</url>
 		</pluginRepository>
 	</pluginRepositories>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>se.natusoft.tools.doc.markdowndoc</groupId>
-				<artifactId>markdowndoc-maven-plugin</artifactId>
-				<version>1.4.1</version>
 
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<goals>
-							<goal>doc</goal>
-						</goals>
-						<phase>install</phase>
-						<configuration>
-							<generatorOptions>
-								<generator>pdf</generator>
-								<inputPaths>md/.*.md</inputPaths>
-							</generatorOptions>
-							<pdfGeneratorOptions>
-								<resultFile>dist/arc42-template-DE.pdf</resultFile>
-							</pdfGeneratorOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<profiles>
+		<profile>
+			<id>pdf</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>se.natusoft.tools.doc.markdowndoc</groupId>
+						<artifactId>markdowndoc-maven-plugin</artifactId>
+						<version>${markdowndoc.version}</version>
+
+						<executions>
+							<execution>
+								<id>generate-docs</id>
+								<goals>
+									<goal>doc</goal>
+								</goals>
+								<phase>install</phase>
+								<configuration>
+									<generatorOptions>
+										<generator>pdf</generator>
+										<inputPaths>md/.*.md</inputPaths>
+									</generatorOptions>
+									<pdfGeneratorOptions>
+										<resultFile>dist/arc42-template-DE.pdf</resultFile>
+									</pdfGeneratorOptions>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>html</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>se.natusoft.tools.doc.markdowndoc</groupId>
+						<artifactId>markdowndoc-maven-plugin</artifactId>
+						<version>${markdowndoc.version}</version>
+
+						<executions>
+							<execution>
+								<id>generate-docs</id>
+								<goals>
+									<goal>doc</goal>
+								</goals>
+								<phase>install</phase>
+								<configuration>
+									<generatorOptions>
+										<generator>html</generator>
+										<inputPaths>md/.*.md</inputPaths>
+									</generatorOptions>
+									<htmlGeneratorOptions>
+										<resultFile>dist/arc42-template-DE.html</resultFile>
+									</htmlGeneratorOptions>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
